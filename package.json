@@ -1,0 +1,26 @@
+{
+  "name": "francischelli.me",
+  "version": "0.1.0",
+  "description": "Giovanni Francischelli personal blog",
+  "main": "index.js",
+  "repository": "git@github.com:gfrancischelli/francischelli.me.git",
+  "author": "Giovanni <gifrancischelli@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "yarn build && next export"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^0.20.0",
+    "@types/react": "^16.8.6",
+    "@zeit/next-mdx": "^1.2.0",
+    "next": "^8.0.3",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  },
+  "devDependencies": {
+    "@zeit/next-typescript": "^1.1.1"
+  }
+}
