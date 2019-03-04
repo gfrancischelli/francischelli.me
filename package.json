@@ -21,6 +21,13 @@
     "react-dom": "^16.8.3"
   },
   "devDependencies": {
-    "@zeit/next-typescript": "^1.1.1"
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@types/next": "^8.0.1",
+    "@types/node": "^11.10.4",
+    "@types/preval.macro": "^3.0.0",
+    "@zeit/next-typescript": "^1.1.1",
+    "babel-plugin-macros": "^2.5.0",
+    "babel-plugin-preval": "^3.0.1",
+    "preval.macro": "^3.0.0"
   }
 }
