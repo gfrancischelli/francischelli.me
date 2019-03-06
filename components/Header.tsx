@@ -1,9 +1,10 @@
 import React from "react";
 import { styled } from "./Theme";
 import { NextFC } from "next";
+import { default as Link } from "next/link";
 
 const Wrapper = styled.div`
-  margin-bottom: ${p => p.theme.margins.md};
+  margin-bottom: ${p => p.theme.margins.lg};
 
   #hi {
     font-size: 24px;
@@ -29,9 +30,13 @@ const Wrapper = styled.div`
 
 const Header: NextFC = ({ children }) => (
   <Wrapper>
-    <div id="hi">Hi, I'm</div>
-    <h1>Giovanni Francischelli</h1>
-    {children ? <h2>{children}</h2> : null }
+    <Link prefetch href="/">
+      <a>
+        <div id="hi">Hi, I'm</div>
+        <h1>Giovanni Francischelli</h1>
+      </a>
+    </Link>
+    {children ? <h2>{children}</h2> : null}
   </Wrapper>
 );
 
