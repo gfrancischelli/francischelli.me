@@ -1,12 +1,8 @@
 import React from "react";
-import articles from "../content/article-list";
-import { PageComponent } from "../components/PageComponent.d";
-import {default as Link} from "next/link";
-import A from "../components/A";
+import { default as Link } from "next/link";
 
-// const ArticleIndex = (articles) => (
-//     <div></div>
-// )
+import A from "../components/A";
+import { PageComponent } from "../components/PageComponent.d";
 
 const Index: PageComponent = () => <React.Fragment />;
 
@@ -21,8 +17,8 @@ Index.Heading = () => (
       <A>thougthts</A>
     </Link>
     , connect on <A href="https://linkedin.in/gfrancischelli">linkedin</A>,{" "}
-    visit my <A href="https://github.com/gfrancischelli">github profile</A>
-    or view the{" "}
+    visit my <A href="https://github.com/gfrancischelli">github profile</A> or
+    view the{" "}
     <A href="https://github.com/gfrancischelli/francischelli.me">source code</A>
     .
   </>
