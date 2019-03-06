@@ -10,6 +10,7 @@ const colors = {
   primary: "#DB306F",
   background: "#FAFAFA",
   grey: {
+    lighter: "#B6B6B6",
     light: "#7D7B7B",
     neutral: "#6E6366",
     dark: "#57494C"
@@ -44,6 +45,10 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
     color: ${(p: ThemeProps<Theme>) => p.theme.colors.grey.light};
+  }
+
+  a {
+    text-decoration: none;
   }
 
   p {
