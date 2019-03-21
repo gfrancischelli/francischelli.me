@@ -12,7 +12,7 @@ type PropTypes = {
 
 class MyApp extends App<PropTypes> {
   static async getInitialProps({ Component, ctx }: NextAppContext) {
-    let pageProps = {};
+    let pageProps = { path: ctx.pathname || "" };
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -23,6 +23,9 @@ class MyApp extends App<PropTypes> {
 
   render() {
     const { Component, pageProps } = this.props;
+    // The ternary operator here fixes next export issue where path was undefined.
+    const [_, _root] = pageProps.path ? pageProps.path.split("/") : "/";
+    const thoughts_page = _root == "thoughts";
 
     return (
       <Container>
@@ -31,13 +34,11 @@ class MyApp extends App<PropTypes> {
             <GlobalStyle />
             <Layout>
               <>
-                <Header>
-                  {Component.Heading ? <Component.Heading /> : null}
-                </Header>
                 <Component {...pageProps} />
               </>
             </Layout>
           </React.Fragment>
+                  <Header small={thoughts_page} />
         </ThemeProvider>
       </Container>
     );
