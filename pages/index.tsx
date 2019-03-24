@@ -1,26 +1,29 @@
 import React from "react";
 import { default as Link } from "next/link";
 
+import posts from "../content/posts";
+import Posts from "../components/Posts";
+import { styled } from "../components/Theme";
 import A from "../components/A";
-import { PageComponent } from "../components/PageComponent.d";
+import { P, H2 } from "../components/Text";
 
-const Index: PageComponent = () => <React.Fragment />;
+const Wrapper = styled.main`
+  margin-top: ${p => p.theme.margins.lg};
+`;
 
-Index.Heading = () => (
+const Index = () => (
   <>
-    This is my personal website. Feel free to read{" "}
-    <Link href="about">
-      <A>about me</A>
-    </Link>
-    , check out some of my{" "}
-    <Link href="thoughts">
-      <A>thougthts</A>
-    </Link>
-    , connect on <A href="https://linkedin.in/gfrancischelli">linkedin</A>,{" "}
-    visit my <A href="https://github.com/gfrancischelli">github profile</A> or
-    view the{" "}
-    <A href="https://github.com/gfrancischelli/francischelli.me">source code</A>
-    .
+    <P>
+      This is my personal website. Feel free do read more{" "} 
+      <Link href="/about">
+        <A>about me</A>
+      </Link>{" "}
+      or check out some things I’ve been thinking about:
+    </P>
+    <Wrapper>
+      <H2>Blog</H2>
+      <Posts data={posts} />
+    </Wrapper>
   </>
 );
 
