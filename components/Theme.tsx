@@ -46,7 +46,8 @@ const fonts = {
 export const theme = {
   fonts,
   colors,
-  margins
+  margins,
+  max_width: "640px"
 };
 
 export const GlobalStyle = createGlobalStyle`
