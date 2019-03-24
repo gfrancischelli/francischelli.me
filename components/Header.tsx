@@ -6,7 +6,7 @@ import A from "./A";
 import { H1, H3 } from "./Text";
 
 interface Props {
-  small: boolean;
+  home: boolean;
 }
 
 const Wrapper = styled("div")`
@@ -23,28 +23,29 @@ const Wrapper = styled("div")`
     margin-left: -2px; /* Looks off to me without this */
   }
 
-  #container {
-    display: flex;
-    justify-content: space-between;
-
-    ${H3} {
-      margin: 0;
-    }
+  ${A} {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    font-variant: small-caps;
   }
 `;
 
-const Header: NextFC<Props> = ({ small }) => (
-  <Wrapper small={small}>
-    <div id="container">
-      {!small ? <div id="hi">Hi, I'm</div> : null}
-      {small ? <H3>Giovanni Francischelli</H3> : null}
-      <Link prefetch href="/">
-        <div>
-          <A>home</A>
-        </div>
-      </Link>
-    </div>
-    {!small ? <H1>Giovanni Francischelli</H1> : null}
+const Header: NextFC<Props> = ({ home }) => (
+  <Wrapper>
+    {home && (
+      <>
+        <div id="hi">Hi, I'm</div>
+        <H1>Giovanni Francischelli</H1>
+      </>
+    )}
+    {!home && (
+      <>
+        <Link prefetch href="/">
+          <A>francischelli.me</A>
+        </Link>
+      </>
+    )}
   </Wrapper>
 );
 

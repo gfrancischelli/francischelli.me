@@ -24,8 +24,8 @@ class MyApp extends App<PropTypes> {
   render() {
     const { Component, pageProps } = this.props;
     // The ternary operator here fixes next export issue where path was undefined.
-    const [_, _root] = pageProps.path ? pageProps.path.split("/") : "/";
-    const thoughts_page = _root == "thoughts";
+    const [_, _root] = pageProps.path ? pageProps.path.split("/") : "";
+    const home = _root == "";
 
     return (
       <Container>
@@ -38,7 +38,7 @@ class MyApp extends App<PropTypes> {
               </>
             </Layout>
           </React.Fragment>
-                  <Header small={thoughts_page} />
+                  <Header home={home} />
         </ThemeProvider>
       </Container>
     );
