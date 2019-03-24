@@ -14,8 +14,8 @@ const Wrapper = styled("div")`
 
   #hi {
     font-size: 24px;
+    color: ${p => p.theme.colors.base.dark};
     font-family: ${p => p.theme.fonts.main};
-    color: ${p => p.theme.colors.grey.dark};
     margin-bottom: ${p => p.theme.margins.sm};
   }
 

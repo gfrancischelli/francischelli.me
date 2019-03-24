@@ -8,12 +8,8 @@ type Props = {
 
 const Wrapper = styled.ul`
   h3 {
-    color: ${p => p.theme.colors.grey.light};
     font-size: 22px;
-  }
-
-  a {
-    text-decoration: none;
+    color: ${p => p.theme.colors.pink};
   }
 
   li + li {

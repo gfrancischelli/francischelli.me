@@ -7,13 +7,26 @@ import baseStyled, {
 } from "styled-components";
 
 const colors = {
-  primary: "#DB306F",
+  pink: {
+    light: "#FEE6F3",
+    main: "#ED4F89"
+  },
+  yellow: {
+    main: "#F7FD87",
+    dark: "#8A6117"
+  },
+  cyan: {
+    light: "#E2F5FB",
+    main: "#56CCF2",
+    dark: "#4F89A2"
+  },
   background: "#FAFAFA",
-  grey: {
-    lighter: "#B6B6B6",
-    light: "#7D7B7B",
-    neutral: "#6E6366",
-    dark: "#57494C"
+  base: {
+    lightest: "#F9FAFA",
+    light: "#8C8DA6",
+    main: "#5F6781",
+    dark: "#474966",
+    darker: "#3B3D4E"
   }
 };
 
@@ -38,13 +51,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html, body {
-
-    background-color: ${p => p.theme.colors.background};
-
-    font-family: 'Cabin', sans-serif !important;
-    font-weight: 400;
-    font-style: normal;
-    color: ${(p: ThemeProps<Theme>) => p.theme.colors.grey.light};
+    background-color: ${(p: ThemeProps<Theme>) => p.theme.colors.base.lightest};
   }
 
   a {
