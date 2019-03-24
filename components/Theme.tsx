@@ -34,15 +34,23 @@ const margins = {
   sm: "8px",
   md: "16px",
   lg: "32px"
+
+const fonts = {
+  main: "'Source Sans Pro', sans-serif;",
+  accent: "'Playfair Display', serif",
+  monospace: "'Source Code Pro', monospace"
+};
+
 };
 
 export const theme = {
+  fonts,
   colors,
   margins
 };
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Cabin:400,600,700');
+  @import url('https://fonts.googleapis.com/css?family=Playfair+Display:900|Source+Code+Pro|Source+Sans+Pro:400,600,600i');
 
   ${reset}
 
@@ -54,8 +62,11 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${(p: ThemeProps<Theme>) => p.theme.colors.base.lightest};
   }
 
-  a {
+  a, p, span, h1, h2, h3, h4, h5 {
+    font-weight: 400;
     text-decoration: none;
+    font-family: ${(p: ThemeProps<Theme>) => p.theme.fonts.main};
+    color: ${(p: ThemeProps<Theme>) => p.theme.colors.base.main};
   }
 
   p {
