@@ -11,8 +11,16 @@ const validateExtension = file => file.endsWith(".md") || file.endsWith(".mdx");
 function requireFromStringSync(src, file_name) {
   const Module = module.constructor;
   const m = new Module();
-  src = "const React = require('../node_modules/react')\n" + src;
-  m._compile(src, file_name);
+  src = src.replace(
+    `var _Post = _interopRequireDefault(require("../../components/Post"));`,
+    `var _Post = ({children}) => React.createElement("div", {}, children);`
+  );
+
+  code = `const React = require('../node_modules/react');
+  ${src}
+  `;
+
+  m._compile(code, file_name);
   return m.exports;
 }
 
@@ -44,3 +52,7 @@ module.exports = () =>
     .readdirSync(POSTS_DIR)
     .filter(validateExtension)
     .map(getMeta);
+
+fs.readdirSync(POSTS_DIR)
+  .filter(validateExtension)
+  .map(getMeta);
