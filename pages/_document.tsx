@@ -20,7 +20,7 @@ export default class MyDocument extends Document<Props> {
 
   render() {
     return (
-      <html>
+      <html lang="en">
         <Head>
           <meta charSet="UTF-8" />
           <meta
@@ -28,6 +28,7 @@ export default class MyDocument extends Document<Props> {
             content="width=device-width, minimum-scale=1.0"
           />
           {this.props.style_tags}
+          <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
         </Head>
         <body>
           <Main />
