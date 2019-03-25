@@ -1,0 +1,41 @@
+import Post from "../../components/Post";
+
+export const meta = {
+  title: "Hello world!",
+  summary: "Finally",
+  length: 3,
+  published_at: "03-15-2019",
+  tags: ["personal"]
+};
+
+export default ({ children }) => <Post meta={meta}>{children}</Post>;
+
+There are lots of things I've wanted to write about but never felt comfortable doing
+it in platforms not optimized for programming content.
+
+I've finally taken the time to design and code my own blog. You can expect posts
+about web development with focus on React ecosystem, career in IT and personal
+life stuff
+
+I'll also be writing about [ServiceNow](https://servicenow.com), mainly on scripting
+and how to bring the platform to the modern era of webdev.
+
+Thanks to [Next.js](https://nextjs.org/) and [MDX](https://mdxjs.com/) authoring
+capabilities it was possible to rapidly develop a simple posting static site generator.
+
+Deployment is done with [Zeit](https://zeit.co)'s _amazing_ [Now](https://zeit.co/now)
+global serverless deployments. It's Github integration deploys evey commit to master. Neat.
+
+Thanks to [Figma](https://figma.com) being free and easy to use, and [Refactoring UI](https://refactoringui.com/)
+learning resources I was able design a not terrible website. Might write something about
+the lessons learned.
+
+## Best of both worlds
+
+I'll try to post at least one post every 2 weeks. The next one is already on the making.
+
+It will show you a nice approach on leveraging the whole javascript ecosystem
+([npm registry](https://npmjs.org), [ES6+](https://medium.freecodecamp.org/write-less-do-more-with-javascript-es6-5fd4a8e50ee2)
+features and much more!) to develop complex, modern ServiceNow client applications.
+
+Stay tuned!
