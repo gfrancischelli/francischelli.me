@@ -1,6 +1,7 @@
 import reset from "styled-reset";
-import { createGlobalStyle, ThemeProps } from "styled-components";
 import baseStyled, {
+  ThemeProps,
+  createGlobalStyle,
   ThemedStyledInterface,
   ThemeProvider as BaseThemeProvider,
   ThemeProviderComponent
