@@ -5,6 +5,7 @@ import App, { Container, NextAppContext } from "next/app";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import markdown from "../components/markdown";
+import PageDecoration from "../components/PageDecoration";
 import { ThemeProvider, theme, GlobalStyle } from "../components/Theme";
 import {PageComponent} from "../components/PageComponent.d"
 
@@ -36,6 +37,7 @@ class MyApp extends App<PropTypes> {
           <MDXProvider components={markdown}>
             <React.Fragment>
               <GlobalStyle />
+              <PageDecoration />
               <Layout>
                 <>
                   <Header home={home} />
