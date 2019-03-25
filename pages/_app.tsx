@@ -1,7 +1,10 @@
 import React from "react";
+import { MDXProvider } from "@mdx-js/tag";
 import App, { Container, NextAppContext } from "next/app";
+
 import Layout from "../components/Layout";
 import Header from "../components/Header";
+import markdown from "../components/markdown";
 import { ThemeProvider, theme, GlobalStyle } from "../components/Theme";
 import {PageComponent} from "../components/PageComponent.d"
 
@@ -30,15 +33,17 @@ class MyApp extends App<PropTypes> {
     return (
       <Container>
         <ThemeProvider theme={theme}>
-          <React.Fragment>
-            <GlobalStyle />
-            <Layout>
-              <>
-                <Component {...pageProps} />
-              </>
-            </Layout>
-          </React.Fragment>
+          <MDXProvider components={markdown}>
+            <React.Fragment>
+              <GlobalStyle />
+              <Layout>
+                <>
                   <Header home={home} />
+                  <Component {...pageProps} />
+                </>
+              </Layout>
+            </React.Fragment>
+          </MDXProvider>
         </ThemeProvider>
       </Container>
     );
