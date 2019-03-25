@@ -33,7 +33,9 @@ const colors = {
 const margins = {
   sm: "8px",
   md: "16px",
-  lg: "32px"
+  lg: "32px",
+  xl: "64px"
+};
 
 const fonts = {
   main: "'Source Sans Pro', sans-serif;",
@@ -41,9 +43,14 @@ const fonts = {
   monospace: "'Source Code Pro', monospace"
 };
 
+const media = {
+  desktop: `@media (min-width: 992px)`,
+  tablet: `@media (min-width: 768px)`,
+  phone: `@media (min-width: 576px)`
 };
 
 export const theme = {
+  media,
   fonts,
   colors,
   margins,
