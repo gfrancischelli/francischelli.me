@@ -17,17 +17,16 @@ const colors = {
     dark: "#8A6117"
   },
   cyan: {
-    light: "#E2F5FB",
-    main: "#56CCF2",
-    dark: "#4F89A2"
+    light: "#E2F9FB",
+    main: "#56DCF2",
+    dark: "#3782A2"
   },
-  background: "#FAFAFA",
   base: {
-    lightest: "#F9FAFA",
-    light: "#8C8DA6",
-    main: "#5F6781",
-    dark: "#474966",
-    darker: "#3B3D4E"
+    lightest: "#F3F8FA",
+    light: "#7E96B2",
+    main: "#596B8E",
+    dark: "#404A6C",
+    darker: "#2A2D4B"
   }
 };
 
