@@ -5,7 +5,7 @@ import Meta from "../components/Meta";
 
 const Wrapper = styled.div`
   .meta {
-    margin-top: ${p => p.theme.margins.md};
+    margin-top: -${p => p.theme.margins.md};
     margin-bottom: ${p => p.theme.margins.lg};
     font-family: ${p => p.theme.fonts.accent};
     font-size: 14px;
