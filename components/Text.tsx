@@ -47,11 +47,11 @@ export const H3 = styled.h3`
 const StrongWrapper = styled.span`
   position: relative;
 
-  span#hidden {
+  span.hidden {
     display: hidden;
   }
 
-  span#text {
+  span.text {
     position: absolute;
     top: 2px;
     left: 0px;
@@ -60,7 +60,7 @@ const StrongWrapper = styled.span`
     color: ${p => p.theme.colors.yellow.dark};
   }
 
-  span#bg {
+  span.bg {
     position: absolute;
     z-index: 1;
     top: -3px;
@@ -75,8 +75,31 @@ const StrongWrapper = styled.span`
 
 export const Strong: React.FC = ({ children }) => (
   <StrongWrapper>
-    <span id="bg" />
-    <span id="text">{children}</span>
-    <span id="hidden">{children}</span>
+    <span className="bg" />
+    <span className="text">{children}</span>
+    <span className="hidden">{children}</span>
   </StrongWrapper>
 );
+
+export const Emphasis = styled.em`
+  font-style: italic;
+`;
+
+export const BlockQuote = styled.blockquote`
+  padding: ${p => p.theme.margins.md};
+  margin: ${p => p.theme.margins.lg} 0;
+  border-left: 8px solid ${p => p.theme.colors.cyan.main};
+  background-color: ${p => p.theme.colors.cyan.light};
+  color: ${p => p.theme.colors.cyan.dark};
+
+  ${StrongWrapper} {
+    .hidden {
+      display: inline;
+      font-weight: bold;
+    }
+    .bg,
+    .text {
+      display: none;
+    }
+  }
+`;
