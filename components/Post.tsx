@@ -2,6 +2,7 @@ import { PostMeta } from "../content/posts";
 import { styled } from "../components/Theme";
 import { H1 } from "../components/Text";
 import Meta from "../components/Meta";
+import PrismTheme from "../components/PrismTheme";
 
 const Wrapper = styled.div`
   .meta {
@@ -20,6 +21,7 @@ type Props = {
 
 const Post: React.FC<Props> = ({ children, meta }) => (
   <Wrapper>
+    <PrismTheme/>
     <H1>{meta.title}</H1>
     <div className="meta">
       <Meta {...meta} />

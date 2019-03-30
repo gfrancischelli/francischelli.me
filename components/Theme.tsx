@@ -70,7 +70,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${(p: ThemeProps<Theme>) => p.theme.colors.base.lightest};
   }
 
-  a, p, span, h1, h2, h3, h4, h5 {
+  a, p, h1, h2, h3, h4, h5 {
     font-weight: 400;
     text-decoration: none;
     font-family: ${(p: ThemeProps<Theme>) => p.theme.fonts.main};

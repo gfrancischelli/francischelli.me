@@ -1,13 +1,21 @@
 const withTypescript = require("@zeit/next-typescript");
-module.exports = withTypescript();
 
-// next.config.js
 const withMDX = require("@zeit/next-mdx")({
-  extension: /\.mdx?$/
+  extension: /\.mdx?$/,
+  options: {
+    hastPlugins: [require("@mapbox/rehype-prism")]
+  }
 });
 
 module.exports = withTypescript(
   withMDX({
-    pageExtensions: ["js", "jsx", "mdx"]
+    pageExtensions: ["js", "jsx", "mdx"],
+    webpack(config, options) {
+      config.module.rules.push({
+        test: /.css$/,
+        use: "raw-loader"
+      });
+      return config;
+    }
   })
 );
