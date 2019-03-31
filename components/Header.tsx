@@ -10,7 +10,11 @@ interface Props {
 }
 
 const Wrapper = styled("div")`
-  margin-bottom: ${p => (p.small ? p.theme.margins.md : p.theme.margins.lg)};
+  margin-bottom: ${p => p.theme.margins.sm};
+
+  ${p => p.theme.media.tablet} {
+    margin-bottom: ${p => p.theme.margins.lg};
+  }
 
   #hi {
     font-size: 24px;
