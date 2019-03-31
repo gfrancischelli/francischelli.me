@@ -3,7 +3,11 @@ import { styled } from "./Theme";
 const LayoutWrapper = styled.div`
   margin: 0 auto;
   max-width: ${p => p.theme.max_width};
-  padding: ${p => p.theme.margins.lg};
+  padding: ${p => p.theme.margins.md};
+
+  ${p => p.theme.media.tablet} {
+    padding: ${p => p.theme.margins.lg};
+  }
 `;
 
 const Layout: React.FC = ({ children }) => (
