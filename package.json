@@ -11,7 +11,8 @@
     "build": "next build",
     "start": "next start",
     "export": "yarn build && next export -o dist",
-    "now-build": "next build && next export -o dist"
+    "now-build": "next build && next export -o dist",
+    "clear:babel-cache": "rimraf -rf ./node_modules/.cache/babel-loader/*"
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.3.1",
