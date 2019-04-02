@@ -1,7 +1,7 @@
 import Post from "../../components/Post";
 
 export const meta = {
-  title: "Deploying React and Express monorepo with Now",
+  title: "Deploying a Typescript React and Express application with Now",
   summary: "",
   length: 6,
   published_at: "03-30-2019",
@@ -9,3 +9,40 @@ export const meta = {
 };
 
 export default ({ children }) => <Post meta={meta}>{children}</Post>;
+
+When developing client and server applications using `create-react-app` or similar tools
+and setups we often face the following problems:
+
+1. Should I develop everything in the same repository
+2. If so, how package management will work ?
+3. How to start both applications and use them togheter ?
+4. How to deploy ?
+
+> TLDR: We will solve this problems using `yarn workspaces` for manging our monorepo,
+> and `now` builds and routes for deployment
+
+## Monorepo management
+
+Create the monorepo folder and initalize `yarn`
+
+```bash
+$ mkdir cra-express-monorepo && cd $_ && yarn init -y
+```
+
+Create the workspaces folders. We will develop the the react and express applications
+in separate folders:
+
+```bash
+$ mkdir client server
+```
+
+Add the private propety and define our workspaces inside `package.json`.
+
+The `private: true` is required when using workspaces because you don't ever want to accidentaly
+publish the monorepo folder, just the packages inside, thus `yarn` enforces it.
+
+```json
+{
+  "workspaces": ["client", "server"]
+}
+```
