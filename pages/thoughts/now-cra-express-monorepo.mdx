@@ -1,8 +1,8 @@
 import Post from "../../components/Post";
 
 export const meta = {
-  title: "Deploying a Typescript React and Express application with Now",
-  summary: "",
+  title: "Monorepos with server and client applications: from 0 to production",
+  summary: "A modern approach using typescript, koa, and create-react-app",
   length: 6,
   published_at: "03-30-2019",
   tags: ["personal"]
@@ -13,36 +13,185 @@ export default ({ children }) => <Post meta={meta}>{children}</Post>;
 When developing client and server applications using `create-react-app` or similar tools
 and setups we often face the following problems:
 
-1. Should I develop everything in the same repository
+1. Should I keep everything in the same repository
 2. If so, how package management will work ?
 3. How to start both applications and use them togheter ?
-4. How to deploy ?
+4. How will the deployment work ?
 
-> TLDR: We will solve this problems using `yarn workspaces` for manging our monorepo,
+I hope to give one (good) possible answer to every one of these questions.
+All the code shown here will be avaiable at [this repository](https://github.com/gfrancischelli/cra-koa-monorepo-example)
+and will probably be used in the next articles exploring other concepts like authentication.
+
+> **tldr**: We will solve this problems using `yarn workspaces` for manging our monorepo,
 > and `now` builds and routes for deployment
 
-## Monorepo management
+## Monorepo setup with `yarn workspaces`
 
 Create the monorepo folder and initalize `yarn`
 
+> **Note**: Do not initialize your git repo yet. Since CRA initializes a repo too you
+> will have to delete it before initing your own.
+
 ```bash
-$ mkdir cra-express-monorepo && cd $_ && yarn init -y
+$ mkdir cra-koa-monorepo && cd $_ && yarn init -y
 ```
 
-Create the workspaces folders. We will develop the the react and express applications
-in separate folders:
+Create the server folder and initialize `yarn`
 
 ```bash
-$ mkdir client server
+$ mkdir server && yarn init -y
+```
+
+Go back to root dir and initialize the CRA in the client folder.
+
+```bash
+$ npx create-react-app client --typescript
 ```
 
 Add the private propety and define our workspaces inside `package.json`.
 
-The `private: true` is required when using workspaces because you don't ever want to accidentaly
-publish the monorepo folder, just the packages inside, thus `yarn` enforces it.
-
 ```json
 {
+  "private": true,
   "workspaces": ["client", "server"]
 }
 ```
+
+The `private: true` is required when using workspaces because you don't ever want to accidentaly
+publish the monorepo folder, just the packages inside, thus `yarn` enforces it.
+
+Now that workspaces are configured you can run `yarn` commands with:
+
+```bash
+$ yarn workspace <name> <cmd>
+```
+
+## Developing simple Koa server
+
+Intall the dependencies:
+
+```bash
+$ yarn workspace server add koa koa-router
+$ yarn workspace server add -D @types/koa @types/koa-router typescript ts-node-dev
+```
+
+We are going to use `ts-node-dev` for development as it recompile our application
+and watches for file changes.
+
+### Add **Hello** world server to `server/src/index.ts`
+
+```typescript
+import Koa, { Context } from "koa";
+import Router from "koa-router";
+
+const app = new Koa();
+const router = new Router({ prefix: "/api" });
+
+router.get("/hello", async (ctx: Context) => {
+  ctx.body = "Hello World!";
+});
+
+app.use(router.routes());
+app.listen(8080);
+```
+
+Add the following script to our server `package.json` to start the server in development
+
+```json
+{
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpileOnly ./src/index.ts"
+  }
+}
+```
+
+Configure the `./package.json` script to run server start from the root folder:
+
+```json
+{
+  "scripts": {
+    "server:start": "yarn workspace server start"
+  }
+}
+```
+
+Now you can run `yarn server:start`, visit `localhost:8080/api/hello` and you should see
+a friandly Hello World!
+
+## Client configuration
+
+```json
+{
+  "client:start": "yarn workspace client start"
+}
+```
+
+Add proxy
+
+```json
+{
+  "proxy": "http://localhost:8080"
+}
+```
+
+## Configuring `now`
+
+Add the json below to your `now.json`
+
+```json
+{
+  "version": 2,
+  "name": "cra-express-monorepo",
+  "builds": [
+    { "src": "server/src/index.ts", "use": "@now/node-server" },
+  ]
+  "routes": [
+    { "src": "/api/(.*)", "dest": "server/src/" },
+  ]
+}
+```
+
+The build property specifies an array of entry points
+
+Add the following to your builds:
+
+```json
+{
+  "src": "client/package.json",
+  "use": "@now/static-build",
+  "config": { "distDir": "build" }
+}
+```
+
+`@now/static-build` is a builder that takes a `package.json` with a `now-build` script. It runs
+the building script than serve the result as static files, with no server code execution. Since
+CRA builds target the build dist we have to specify in our builder config.
+
+### Routing the static files
+
+```json
+[
+  {
+    "src": "/static/(.*)",
+    "headers": { "cache-control": "s-maxage=31536000,immutable" },
+    "dest": "client/static/$1"
+  },
+  { "src": "/favicon.ico", "dest": "client/favicon.ico" },
+  { "src": "/asset-manifest.json", "dest": "client/asset-manifest.json" },
+  { "src": "/manifest.json", "dest": "client/manifest.json" },
+  { "src": "/precache-manifest.(.*)", "dest": "client/precache-manifest.$1" },
+  {
+    "src": "/service-worker.js",
+    "headers": { "cache-control": "s-maxage=0" },
+    "dest": "client/service-worker.js"
+  },
+  {
+    "src": "/(.*)",
+    "headers": { "cache-control": "s-maxage=0" },
+    "dest": "client/index.html"
+  }
+]
+```
+
+The last definition matches any other route to our index.html, giving our SPA the ability to
+manage the routes.

@@ -13,6 +13,7 @@ const colors = {
     main: "#ED4F89"
   },
   yellow: {
+    light: "#FAFAEA",
     main: "#F7FD87",
     dark: "#8A6117"
   },
