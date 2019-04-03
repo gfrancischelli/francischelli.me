@@ -37,49 +37,16 @@ export const H3 = styled.h3`
   margin-bottom: ${p => p.theme.margins.md};
 
   font-size: 22px;
+  font-weight: 600;
 
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   line-height: 1.3;
   color: ${p => p.theme.colors.base.dark};
 `;
 
-const StrongWrapper = styled.span`
-  position: relative;
-
-  span.hidden {
-    display: hidden;
-  }
-
-  span.text {
-    position: absolute;
-    top: 2px;
-    left: 0px;
-    line-height: 1;
-    z-index: 3;
-    color: ${p => p.theme.colors.yellow.dark};
-  }
-
-  span.bg {
-    position: absolute;
-    z-index: 1;
-    top: -3px;
-    left: -3px;
-    width: calc(100% + 5px);
-    height: calc(100% + 5px);
-    transform: skewX(-10deg);
-    background-color: ${p => p.theme.colors.yellow.main};
-    opacity: 1;
-  }
+export const Strong = styled.strong`
+  font-weight: bold;
 `;
-
-export const Strong: React.FC = ({ children }) => (
-  <StrongWrapper>
-    <span className="bg" />
-    <span className="text">{children}</span>
-    <span className="hidden">{children}</span>
-  </StrongWrapper>
-);
 
 export const Emphasis = styled.em`
   font-style: italic;
@@ -91,15 +58,4 @@ export const BlockQuote = styled.blockquote`
   border-left: 8px solid ${p => p.theme.colors.cyan.main};
   background-color: ${p => p.theme.colors.cyan.light};
   color: ${p => p.theme.colors.cyan.dark};
-
-  ${StrongWrapper} {
-    .hidden {
-      display: inline;
-      font-weight: bold;
-    }
-    .bg,
-    .text {
-      display: none;
-    }
-  }
 `;
